@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:23:01 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/05/11 13:53:06 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/06 17:00:05 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 # define CUB3D_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 43
 # endif
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 600
+# define HEIGHT 400
 # define KEY_ECHAP 53
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_SHIFT 257
+# define KEY_CTRL 256
 # define ROTATE_LEFT 123
 # define ROTATE_RIGHT 124
 # define TEX_WIDTH 500
@@ -62,6 +64,8 @@ typedef struct s_key
 	int		a;
 	int		rot_left;
 	int		rot_right;
+	int		shift;
+	int		ctrl;
 }	t_key;
 
 typedef struct s_raycasting
@@ -93,14 +97,15 @@ typedef struct s_raycasting
 	int		color;
 	int		texx;
 	int		texy;
+	double	texpos;
 }	t_rayc;
 
 typedef struct s_text
 {
-	int	*addr1;
-	int	*addr2;
-	int	*addr3;
-	int	*addr4;
+	int	*add1;
+	int	*add2;
+	int	*add3;
+	int	*add4;
 }	t_text;
 
 typedef struct s_data
@@ -126,11 +131,8 @@ typedef struct s_data
 */
 int		ft_strlen(char *s);
 char	*get_next_line(int fd);
-char	*create_line(int fd, char *parts);
 int		ft_strchr(char *s, char c);
 char	*ft_strjoin(char *parts, char *line);
-char	*fill_line(char *parts);
-char	*new_parts(char *parts);
 /*
 ** ----- ft_split.c -----
 */
@@ -184,7 +186,7 @@ void	print_txt_colors(t_data *data);
 void	print_map(t_data *data);
 int		ft_isdigit(char c);
 /*
-** ----- mlx_2.c -----
+** ----- mlx_utils.c -----
 */
 int		loop(t_data *data);
 void	draw_floor_ceiling(t_data *data);
@@ -198,6 +200,7 @@ void	raycasting(t_data *data);
 void	init(t_data *data);
 void	dda(t_data *data);
 void	step_init(t_data *data);
+void	draw_textures(t_data *data);
 /*
 ** ----- movements.c -----
 */
@@ -212,4 +215,5 @@ void	move(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	my_mlx_pixel_put2(t_data *data, int x, int y, int color);
 int		safe_exit(t_data *data);
+void	init_datas(t_data *data);
 #endif

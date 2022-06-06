@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:24:06 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/05/11 13:53:51 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:58:44 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	ft_press(int keycode, t_data *data)
 		data->keys.rot_left = 1;
 	if (keycode == ROTATE_RIGHT)
 		data->keys.rot_right = 1;
+	if (keycode == KEY_SHIFT)
+		data->keys.shift = 1;
+	if (keycode == KEY_CTRL)
+		data->keys.ctrl = 1;
 	return (0);
 }
 
@@ -45,6 +49,10 @@ int	ft_release(int keycode, t_data *data)
 		data->keys.rot_left = 0;
 	if (keycode == ROTATE_RIGHT)
 		data->keys.rot_right = 0;
+	if (keycode == KEY_SHIFT)
+		data->keys.shift = 0;
+	if (keycode == KEY_CTRL)
+		data->keys.ctrl = 0;
 	return (0);
 }
 
@@ -56,7 +64,7 @@ void	keys_loop(t_data *data)
 
 	strafe(data);
 	move(data);
-	rotation = M_PI / 135;
+	rotation = M_PI / 200;
 	if (data->keys.rot_left || data->keys.rot_right)
 	{
 		if (data->keys.rot_left)
@@ -94,18 +102,29 @@ void	strafe(t_data *data)
 
 void	move(t_data *data)
 {
-	int	d;
+	double	d;
+	double	v;
 
-	d = 1;
+	d = 0.5;
+	v = 0.05;
+	if (data->keys.shift)
+		v *= 1.5;
+	if (data->keys.ctrl)
+		v *= 0.5;
 	if (data->keys.w || data->keys.s)
 	{
 		if (data->keys.s)
-			d *= -1;
-		if (data->map[(int)(data->rayc.player_posy)][(int)(\
-		data->rayc.player_posx + (data->rayc.player_dirx * d))] == 0)
-			data->rayc.player_posx += (data->rayc.player_dirx * 0.1 * d);
-		if (data->map[(int)(data->rayc.player_posy + (\
-		data->rayc.player_diry * d))][(int)(data->rayc.player_posx)] == 0)
-			data->rayc.player_posy += (data->rayc.player_diry * 0.1 * d);
+			d *= -1.0;
+		if (data->map[(int)(data->rayc.player_posy)][(int) \
+		(data->rayc.player_posx + (data->rayc.player_dirx * v * d))] == 0 || \
+		data->map[(int)(data->rayc.player_posy)][(int)(data->rayc.player_posx \
+		+ (data->rayc.player_dirx * v * d))] == 3)
+			data->rayc.player_posx += (data->rayc.player_dirx * d * v);
+		if (data->map[(int)(data->rayc.player_posy + \
+		(data->rayc.player_diry * v * d))][(int) \
+		(data->rayc.player_posx)] == 0 || data->map[(int) \
+		(data->rayc.player_posy)][(int)(data->rayc.player_posx + \
+		(data->rayc.player_dirx * v * d))] == 3)
+			data->rayc.player_posy += (data->rayc.player_diry * d * v);
 	}
 }

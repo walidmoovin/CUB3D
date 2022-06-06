@@ -1,18 +1,18 @@
 SRCS	= main.c
 
-SRCS	+= PARSING/utilities.c \
-PARSING/fileverif.c \
-PARSING/parsing_utilities.c \
-PARSING/parsing_utilities2.c \
-PARSING/parsing.c \
-PARSING/ft_split.c \
-PARSING/gnl/get_next_line.c \
-PARSING/gnl/get_next_line_utils.c \
-PARSING/print_parsing.c \
+SRCS	+= parsing/utilities.c \
+parsing/fileverif.c \
+parsing/parsing_utilities.c \
+parsing/parsing_utilities2.c \
+parsing/parsing.c \
+parsing/ft_split.c \
+parsing/get_next_line.c \
+parsing/print_parsing.c \
+parsing/utils.c \
 mlx/mlx.c \
 mlx/movements.c \
 mlx/utils.c \
-mlx/mlx_2.c
+mlx/mlx_utils.c
 
 OBJS	= $(SRCS:.c=.o)
 

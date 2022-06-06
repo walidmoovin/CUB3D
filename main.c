@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:19:48 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/05/11 13:42:48 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:58:37 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	if (argc != 2)
-		return (0);
+		return (printf("Error"));
 	struct_init(&data);
 	if (!core_parsing(&data, argv))
 		return (printf("Error"));

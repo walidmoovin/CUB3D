@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:57:03 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/05/11 13:36:50 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/02 11:39:20 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ char	**parse_file(char *argv)
 	int		i;
 
 	i = file_lines(argv);
+	if (!i)
+		return (NULL);
 	str = malloc(sizeof(char *) * (i + 1));
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
 	i = 0;
-	while (1)
+	str[i] = get_next_line(fd);
+	while (str[i])
 	{
-		str[i] = get_next_line(fd);
-		if (str[i] == NULL)
-			break ;
 		i++;
+		str[i] = get_next_line(fd);
 	}
 	str[i] = NULL;
 	if (!map_line(str[i - 1]) || only_sp(str[i - 1]) || str[i - 1][0] == '\n')

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_2.c                                            :+:      :+:    :+:   */
+/*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 13:57:49 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/05/11 13:53:31 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/06 16:58:47 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	textures_parsing(t_data *data)
 	|| !get_addr(data->parsing.we_txt, data) \
 	|| !get_addr(data->parsing.ea_txt, data))
 		return (0);
-	data->text.addr1 = (int *)mlx_get_data_addr(\
+	data->text.add1 = (int *)mlx_get_data_addr(\
 	get_addr(data->parsing.no_txt, data), &data->bpp, &data->size_l, &data->e);
-	data->text.addr2 = (int *)mlx_get_data_addr(\
+	data->text.add2 = (int *)mlx_get_data_addr(\
 	get_addr(data->parsing.so_txt, data), &data->bpp, &data->size_l, &data->e);
-	data->text.addr3 = (int *)mlx_get_data_addr(\
+	data->text.add3 = (int *)mlx_get_data_addr(\
 	get_addr(data->parsing.we_txt, data), &data->bpp, &data->size_l, &data->e);
-	data->text.addr4 = (int *)mlx_get_data_addr(\
+	data->text.add4 = (int *)mlx_get_data_addr(\
 	get_addr(data->parsing.ea_txt, data), &data->bpp, &data->size_l, &data->e);
 	return (1);
 }

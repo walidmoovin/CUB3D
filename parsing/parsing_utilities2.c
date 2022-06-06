@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 14:55:56 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/05/11 10:54:35 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/02 11:39:16 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	file_lines(char *str)
 	char	*gnl;
 
 	fd = open(str, O_RDONLY);
-	gnl = ft_strdup("");
-	i = 1;
+	gnl = get_next_line(fd);
+	i = 0;
 	while (gnl)
 	{
+		i++;
 		if (gnl)
 			free(gnl);
 		gnl = get_next_line(fd);
-		i++;
 	}
 	close(fd);
 	return (i);
