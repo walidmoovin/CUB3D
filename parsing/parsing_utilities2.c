@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 14:55:56 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/06/02 11:39:16 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/21 21:08:58 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ int	valid_colors(t_data *data)
 	{
 		x = -1;
 		while (data->parsing.floor[y][++x])
-			if (!ft_isdigit(data->parsing.floor[y][x]) || y > 2 \
-			|| ft_atoi(data->parsing.floor[y]) > 255 \
+			if ((!ft_isdigit(data->parsing.floor[y][x]) \
+			&& data->parsing.floor[y][x] != ' ') || y > 2 \
+			|| ft_atoi(data->parsing.floor[y]) > 255
 			|| ft_atoi(data->parsing.floor[y]) < 0)
 				return (0);
 	}
@@ -72,38 +73,13 @@ int	valid_colors(t_data *data)
 	{
 		x = -1;
 		while (data->parsing.ceiling[y][++x])
-			if (!ft_isdigit(data->parsing.ceiling[y][x]) || y > 2 \
+			if ((!ft_isdigit(data->parsing.ceiling[y][x])
+				&& data->parsing.ceiling[y][x] != ' ') || y > 2
 				|| ft_atoi(data->parsing.ceiling[y]) > 255
 				|| ft_atoi(data->parsing.ceiling[y]) < 0)
 				return (0);
 	}
 	return (1);
-}
-
-void	char_to_int(t_data *data)
-{
-	int	i;
-	int	y;
-
-	data->map = malloc(sizeof(int *) * data->parsing.map_lines);
-	i = -1;
-	while (data->parsing.map[++i])
-	{
-		y = -1;
-		data->map[i] = malloc(sizeof(int) * data->parsing.map_maxlen);
-		while (data->parsing.map[i][++y])
-		{
-			if (data->parsing.map[i][y] == 'N' || data->parsing.map[i][y] == 'S'
-				|| data->parsing.map[i][y] == 'E' \
-				|| data->parsing.map[i][y] == 'W')
-			{
-				player_dir(data->parsing.map[i][y], data);
-				data->map[i][y] = 3;
-			}
-			else
-				data->map[i][y] = data->parsing.map[i][y] - '0';
-		}
-	}
 }
 
 void	player_dir(char dir, t_data *data)

@@ -18,7 +18,7 @@ OBJS	= $(SRCS:.c=.o)
 
 NAME	= cub3d
 
-FLAGS	= -Wall -Wextra -Werror -fsanitize=address -g
+FLAGS	= -Wall -Wextra -Werror
 
 INCLUDE	= -Iincludes -Iminilibx -lz -lmlx -framework OpenGL -framework AppKit
 

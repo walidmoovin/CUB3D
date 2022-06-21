@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 13:23:02 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/06/02 11:39:27 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/21 21:04:57 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,47 @@ int	ft_strchr(char *s, char c)
 	while (*s++)
 		if (*s == c)
 			return (1);
+	return (0);
+}
+
+int	free_return(char **tab, char **tab2)
+{
+	int	i;
+
+	i = -1;
+	if (tab)
+	{
+		while (tab[++i])
+			free(tab[i]);
+		free(tab);
+	}
+	i = -1;
+	if (tab2)
+	{
+		while (tab2[++i])
+			free(tab2[i]);
+		free(tab2);
+	}
+	return (0);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = -1;
+	if (tab)
+	{
+		while (tab[++i])
+			free(tab[i]);
+		free(tab);
+	}
+}
+
+int	map_char(char c)
+{
+	if (c == '1' || c == '0' || c == 'N'
+		|| c == 'E' || c == 'S' || c == 'W' || c == '\n' || c == ' ')
+		return (1);
 	return (0);
 }

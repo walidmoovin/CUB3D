@@ -6,24 +6,24 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:31:09 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/06/02 11:39:12 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/21 20:55:56 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	map_char(char c)
-{
-	if (c == '1' || c == '0' || c == 'N'
-		|| c == 'E' || c == 'S' || c == 'W' || c == '\n' || c == ' ')
-		return (1);
-	return (0);
-}
-
 int	map_line(char *str)
 {
 	int	i;
+	int	n;
 
+	n = 0;
+	i = -1;
+	while (str[++i])
+		if (str[i] != '\n' && str[i] != ' ')
+			n = 1;
+	if (n == 0)
+		return (0);
 	i = -1;
 	while (str[++i])
 		if (!map_char(str[i]))
@@ -39,6 +39,18 @@ int	txt_line(char *str, char first, char second)
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == first && str[i + 1] == second && str[i + 2] == ' ')
+		return (1);
+	return (0);
+}
+
+int	txt_linec(char *str, char first, char second)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == first && str[i + 1] == second)
 		return (1);
 	return (0);
 }
@@ -67,8 +79,12 @@ char	*get_txt(char *str, t_data *data)
 
 char	**get_color(char **str, t_data *data)
 {
-	while (!(*str[0] >= '0' && *str[0] <= '9') && *str[0])
-		str[0]++;
+	int	i;
+
+	i = -1;
 	data->parsing.count_error++;
+	while (str[++i])
+		while (!(*str[i] >= '0' && *str[i] <= '9') && *str[i])
+			str[i]++;
 	return (str);
 }

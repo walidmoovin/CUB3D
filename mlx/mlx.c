@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:09:10 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/06/06 16:58:45 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/21 20:46:12 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	dda(t_data *data)
 			data->rayc.mapy += data->rayc.stepy;
 			data->rayc.side = 1;
 		}
-		if (data->map[data->rayc.mapy][data->rayc.mapx] == 1)
+		if (data->parsing.map[data->rayc.mapy][data->rayc.mapx] == '1')
 			data->rayc.hit = 1;
 	}
 	if (data->rayc.side == 0)

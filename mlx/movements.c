@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:24:06 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/06/06 16:58:44 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/21 21:08:04 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	ft_press(int keycode, t_data *data)
 		data->keys.rot_right = 1;
 	if (keycode == KEY_SHIFT)
 		data->keys.shift = 1;
-	if (keycode == KEY_CTRL)
-		data->keys.ctrl = 1;
 	return (0);
 }
 
@@ -51,8 +49,6 @@ int	ft_release(int keycode, t_data *data)
 		data->keys.rot_right = 0;
 	if (keycode == KEY_SHIFT)
 		data->keys.shift = 0;
-	if (keycode == KEY_CTRL)
-		data->keys.ctrl = 0;
 	return (0);
 }
 
@@ -91,11 +87,11 @@ void	strafe(t_data *data)
 	{
 		if (data->keys.a)
 			s *= -1;
-		if (data->map[(int)(data->rayc.player_posy)][(int)(\
-		data->rayc.player_posx + (data->rayc.planex * s))] == 0)
+		if (data->parsing.map[(int)(data->rayc.player_posy)][(int)(\
+		data->rayc.player_posx + (data->rayc.planex * s))] == '0')
 			data->rayc.player_posx += data->rayc.planex * s * 0.1;
-		if (data->map[(int)(data->rayc.player_posy + (\
-		data->rayc.planey * s))][(int)(data->rayc.player_posx)] == 0)
+		if (data->parsing.map[(int)(data->rayc.player_posy + (\
+		data->rayc.planey * s))][(int)(data->rayc.player_posx)] == '0')
 			data->rayc.player_posy += data->rayc.planey * s * 0.1;
 	}
 }
@@ -109,22 +105,21 @@ void	move(t_data *data)
 	v = 0.05;
 	if (data->keys.shift)
 		v *= 1.5;
-	if (data->keys.ctrl)
-		v *= 0.5;
 	if (data->keys.w || data->keys.s)
 	{
 		if (data->keys.s)
 			d *= -1.0;
-		if (data->map[(int)(data->rayc.player_posy)][(int) \
-		(data->rayc.player_posx + (data->rayc.player_dirx * v * d))] == 0 || \
-		data->map[(int)(data->rayc.player_posy)][(int)(data->rayc.player_posx \
-		+ (data->rayc.player_dirx * v * d))] == 3)
+		if (data->parsing.map[(int)(data->rayc.player_posy)][(int) \
+		(data->rayc.player_posx + (data->rayc.player_dirx * v * d))] == '0' || \
+		is_direction(data->parsing.map[(int)(data->rayc.player_posy) \
+		][(int)(data->rayc.player_posx \
+		+ (data->rayc.player_dirx * v * d))]))
 			data->rayc.player_posx += (data->rayc.player_dirx * d * v);
-		if (data->map[(int)(data->rayc.player_posy + \
+		if (data->parsing.map[(int)(data->rayc.player_posy + \
 		(data->rayc.player_diry * v * d))][(int) \
-		(data->rayc.player_posx)] == 0 || data->map[(int) \
+		(data->rayc.player_posx)] == '0' || is_direction(data->parsing.map[(int)
 		(data->rayc.player_posy)][(int)(data->rayc.player_posx + \
-		(data->rayc.player_dirx * v * d))] == 3)
+		(data->rayc.player_dirx * v * d))]))
 			data->rayc.player_posy += (data->rayc.player_diry * d * v);
 	}
 }

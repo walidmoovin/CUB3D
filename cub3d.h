@@ -6,7 +6,7 @@
 /*   By: wbekkal <wbekkal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 13:23:01 by wbekkal           #+#    #+#             */
-/*   Updated: 2022/06/06 17:00:05 by wbekkal          ###   ########.fr       */
+/*   Updated: 2022/06/21 21:02:15 by wbekkal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,27 +149,29 @@ int		ft_strcmp(char *s1, char *s2);
 /*
 ** ----- parsing_utilities.c -----
 */
+int		txt_linec(char *str, char first, char second);
 int		map_char(char c);
 int		map_line(char *str);
 int		txt_line(char *str, char first, char second);
 char	*get_txt(char *str, t_data *data);
 char	**get_color(char **str, t_data *data);
+int		free_return(char **tab, char **tab2);
 /*
 ** ----- parsing_utilities2.c -----
 */
 int		file_lines(char *str);
 void	map_info(char **file, t_data *data);
 int		valid_colors(t_data *data);
-void	char_to_int(t_data *data);
 void	player_dir(char dir, t_data *data);
 /*
 ** ----- parsing.c -----
 */
+void	free_tab(char **tab);
 int		core_parsing(t_data *data, char **argv);
 char	**parse_file(char *argv);
 void	parse_map(char **str, t_data *data);
 void	parse_txt(char **str, t_data *data);
-void	free_all(t_data *data);
+int		verif_lot_map(char **str);
 /*
 ** ----- fileverif.c -----
 */
@@ -193,9 +195,11 @@ void	draw_floor_ceiling(t_data *data);
 int		creatergb(int r, int g, int b);
 int		textures_parsing(t_data *data);
 void	*get_addr(char *text, t_data *data);
+int		wall_algo(t_data *data, int x, int y);
 /*
 ** ----- mlx.c -----
 */
+void	*ft_calloc(int count, int size);
 void	raycasting(t_data *data);
 void	init(t_data *data);
 void	dda(t_data *data);
